@@ -1,0 +1,9 @@
+.DS_Store
+
+# Local editor and agent deployment files
+.vscode/mcp.json
+.codex/skills/
+
+# Local/generated work files
+workplace/*
+!workplace/.gitkeep
