@@ -1,0 +1,7 @@
+interface:
+  display_name: "Miku Media Proc"
+  short_description: "Media processing workflows for local projects"
+  default_prompt: "Use $miku-media-proc to process local video, audio, image, subtitle, or metadata files reproducibly."
+
+policy:
+  allow_implicit_invocation: true
