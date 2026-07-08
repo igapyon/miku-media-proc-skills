@@ -15,10 +15,15 @@ Resolve scripting glue when it fits the existing project style.
 Use Python for DaVinci Resolve scripting/API access when Resolve's Python
 module is the most direct integration path.
 
+When deciding whether to keep, normalize, or convert video frame rate, read
+[frame-rate-policy.md](frame-rate-policy.md). Respect the source frame rate by
+default, verify it with FFmpeg or `ffprobe`, and preserve the 60fps family for
+game or motion-dense footage unless there is a concrete reason to convert.
+
 When DaVinci Resolve playback is unstable with smartphone or game-recorded
 media, especially when 60fps sources play slowly or audio stutters, read
-[../davinci/resolve-24fps-stable-workflow.md](../davinci/resolve-24fps-stable-workflow.md) before
-choosing a conversion or timeline strategy.
+[../davinci/resolve-24fps-recovery-case.md](../davinci/resolve-24fps-recovery-case.md) as a
+failure-and-recovery case record before choosing a recovery strategy.
 
 When preparing a final upload for YouTube, read
 [../youtube/youtube-upload-fps.md](../youtube/youtube-upload-fps.md) before choosing whether to keep
@@ -39,11 +44,18 @@ project root `DECISIONS.md` using [decisions-log.md](decisions-log.md).
 
 - Video: inspect container, streams, duration, dimensions, frame rate, codec,
   bitrate, and audio layout before conversion.
+- Program assembly: for final video deliverables, confirm whether to include a
+  title card, end card, countdown, slate, or other front/back matter before
+  rendering the delivery file.
+- Frame rate: verify the source fps with FFmpeg or `ffprobe`; keep the source
+  fps by default, and avoid mixing `60` with `60000/1001` without an explicit
+  reason.
 - Resolve: inspect timeline frame rate, playback frame rate, timeline start
   frame, and whether API edits should rebuild a new timeline instead of
   destructively modifying the current one.
-- YouTube: distinguish Resolve editing-stability assets from final upload
-  assets; do not assume the intermediate Resolve fps is the best delivery fps.
+- YouTube: distinguish Resolve recovery or editing-stability assets from final
+  upload assets; do not assume the intermediate Resolve fps is the best
+  delivery fps.
   Confirm the upload range before rendering: full timeline, in/out range, or a
   rebuilt timeline that already represents the upload segment.
 - Zundamon: prepare narration text for speech smoothness before synthesis;
@@ -65,6 +77,8 @@ project root `DECISIONS.md` using [decisions-log.md](decisions-log.md).
   destination is specified.
 - Avoid lossy recompression when stream copy or metadata-only changes satisfy
   the request.
+- Do not add title cards, end cards, or slates without user intent; prompt for
+  them when producing a final viewer-facing video.
 - Record the exact command or script used when reporting results.
 
 ## Escalation Points
