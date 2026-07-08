@@ -11,6 +11,20 @@ Before converting, inspect:
 - audio codec, sample rate, channels, and duration;
 - whether the source has variable or unusual frame rate behavior.
 
+Frame-rate inspection command:
+
+```bash
+ffprobe -v error \
+  -select_streams v:0 \
+  -show_entries stream=r_frame_rate,avg_frame_rate,time_base,duration,nb_frames \
+  -of default=noprint_wrappers=1 \
+  input.mp4
+```
+
+Use the result to preserve the source frame rate by default. For 60fps-family
+inputs, distinguish true `60` from `60000/1001`; do not round or convert unless
+the workflow has a concrete reason.
+
 ## Resolve Preparation Pattern
 
 For Resolve troubleshooting, prefer splitting input into separate assets before
@@ -23,7 +37,7 @@ This makes failures easier to isolate. Video frame-rate/container problems and
 audio sample-rate/codec problems can be tested independently, and only the
 unstable side needs to be regenerated.
 
-24fps equal-speed video for a Resolve workflow:
+24fps equal-speed video from the Resolve recovery case:
 
 ```powershell
 ffmpeg -y -hide_banner `
@@ -54,7 +68,9 @@ does not change duration by itself.
 
 ## Related References
 
-- [../davinci/resolve-24fps-stable-workflow.md](../davinci/resolve-24fps-stable-workflow.md): FFmpeg
-  commands used for Resolve-stable assets.
+- [../davinci/resolve-24fps-recovery-case.md](../davinci/resolve-24fps-recovery-case.md): FFmpeg
+  commands from a Resolve 24fps recovery case.
+- [../integration/frame-rate-policy.md](../integration/frame-rate-policy.md): general source-fps
+  preservation and conversion policy.
 - [../youtube/youtube-upload-fps.md](../youtube/youtube-upload-fps.md): final upload frame-rate
   decision rules.

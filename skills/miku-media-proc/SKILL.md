@@ -32,12 +32,14 @@ setup or troubleshooting.
    constraints, and whether destructive changes are allowed.
 2. Inspect source media metadata before changing files when local media files
    are available.
-3. Prefer reproducible commands and scripts over one-off manual steps.
-4. Write generated files under a task-specific output directory unless the user
+3. For final video deliverables, confirm whether the program assembly should
+   include a title card, end card, or other front/back matter.
+4. Prefer reproducible commands and scripts over one-off manual steps.
+5. Write generated files under a task-specific output directory unless the user
    asks for an exact destination.
-5. Verify output existence, duration or dimensions where relevant, and basic
+6. Verify output existence, duration or dimensions where relevant, and basic
    metadata before reporting completion.
-6. When a media-processing problem is diagnosed and solved while using this
+7. When a media-processing problem is diagnosed and solved while using this
    skill, record the problem, background, decision, and resolution in the
    project root `DECISIONS.md`; see
    [references/integration/decisions-log.md](references/integration/decisions-log.md).
@@ -47,7 +49,8 @@ setup or troubleshooting.
 - [index.json](index.json): generated inventory for this skill package.
 - [references/integration/workflow.md](references/integration/workflow.md): general media-processing workflow and task routing.
 - [references/integration/decisions-log.md](references/integration/decisions-log.md): rules for recording solved media-processing decisions in project `DECISIONS.md`.
-- [references/davinci/resolve-24fps-stable-workflow.md](references/davinci/resolve-24fps-stable-workflow.md): DaVinci Resolve 24fps playback-stability workflow for smartphone or game-recorded media.
+- [references/integration/frame-rate-policy.md](references/integration/frame-rate-policy.md): source frame-rate preservation and conversion policy.
+- [references/davinci/resolve-24fps-recovery-case.md](references/davinci/resolve-24fps-recovery-case.md): DaVinci Resolve 24fps failure-and-recovery case for unstable smartphone or game-recorded media.
 - [references/youtube/youtube-upload-fps.md](references/youtube/youtube-upload-fps.md): frame-rate guidance for YouTube upload targets.
 - [references/youtube/youtube-resolve-delivery.md](references/youtube/youtube-resolve-delivery.md): DaVinci Resolve delivery workflow for YouTube upload files.
 - [references/davinci/tools-davinci-resolve.md](references/davinci/tools-davinci-resolve.md): DaVinci Resolve Studio and API notes.

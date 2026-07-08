@@ -28,11 +28,26 @@ target inspectable as its own timeline.
 
 1. Confirm the timeline or range that should be uploaded.
 2. Confirm final delivery fps using [youtube-upload-fps.md](youtube-upload-fps.md).
-3. Confirm final audio is present and aligned.
-4. Render to a local output file intended for upload, not to an intermediate
+3. Confirm whether the program assembly should include a title card or end card.
+4. Confirm final audio is present and aligned.
+5. Render to a local output file intended for upload, not to an intermediate
    troubleshooting asset.
-5. Inspect the rendered file with FFmpeg.
-6. If the output is acceptable, treat that file as the YouTube upload candidate.
+6. Inspect the rendered file with FFmpeg.
+7. If the output is acceptable, treat that file as the YouTube upload candidate.
+
+## Program Assembly Notes
+
+Use production terminology consistently:
+
+- Title card: an opening visual that names the video, piece, episode, or topic.
+- End card: a closing visual used for credits, next action, related links, or a
+  clean ending.
+- Slate: a production/technical marker; do not include it in the public upload
+  unless explicitly requested.
+
+For viewer-facing YouTube files, ask whether a title card and end card are
+needed before final rendering. Keep them out when the user wants a raw clip,
+archive file, or direct gameplay capture.
 
 ## Render Target Notes
 
@@ -77,14 +92,15 @@ After rendering, inspect:
 - dimensions and rotation metadata;
 - audio stream presence;
 - audio sample rate and channels.
+- expected title card and end card presence when they were requested.
 
 For YouTube upload candidates, also check that the rendered duration matches
 the intended upload range closely enough for the task.
 
-## Relationship To Stable Intermediates
+## Relationship To Recovery Intermediates
 
-The Resolve-stable workflow may use a video-only MP4 and an audio-only WAV for
-editing and troubleshooting. That is not the final YouTube upload shape.
+The Resolve 24fps recovery case may use a video-only MP4 and an audio-only WAV
+for editing and troubleshooting. That is not the final YouTube upload shape.
 
 For delivery, render or mux a single upload file after the target range is
 confirmed.

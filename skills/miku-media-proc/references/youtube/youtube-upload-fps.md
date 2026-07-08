@@ -1,7 +1,8 @@
 # YouTube Upload FPS Guidance
 
 Use this reference when choosing a frame rate for YouTube delivery, especially
-after creating Resolve-stable intermediate assets at a different frame rate.
+after creating Resolve recovery or editing-stability assets at a different
+frame rate.
 
 ## Source Rule
 
@@ -9,13 +10,17 @@ YouTube's official upload guidance recommends encoding and uploading content in
 the same frame rate it was recorded. Common accepted frame rates include `24`,
 `25`, `30`, `48`, `50`, and `60` fps.
 
+Before applying this delivery rule, inspect the input with FFmpeg or `ffprobe`
+and respect the measured source frame rate. If the source is `60000/1001`, do
+not round it to `60` unless the delivery path explicitly requires true 60fps.
+
 Treat this as the default delivery rule:
 
 - If the original content is 60fps game or smartphone footage, prefer a 60fps
   final upload when the editing/export path can produce it reliably.
 - If the original content is 24fps or a film-like edit, 24fps is a normal
   delivery choice.
-- If Resolve is only stable with 24fps intermediate assets, do not assume that
+- If a Resolve recovery path used 24fps intermediate assets, do not assume that
   24fps is also the ideal YouTube final target; decide based on content and
   export reliability.
 
@@ -28,9 +33,9 @@ Separate these two decisions:
   motion and viewer experience.
 
 For unstable Resolve workflows, a 24fps equal-speed video plus 48kHz WAV may be
-a good intermediate strategy. For final YouTube upload, 60fps is usually better
-for rhythm games, action games, UI-heavy screen recordings, and other motion-
-dense footage when the source was 60fps.
+a useful recovery workaround. For final YouTube upload, 60fps-family delivery
+is usually better for rhythm games, action games, UI-heavy screen recordings,
+and other motion-dense footage when the source was 60fps-family.
 
 24fps can still be acceptable for YouTube when:
 
@@ -43,10 +48,11 @@ dense footage when the source was 60fps.
 ## Recommended Decision Flow
 
 1. Inspect the source frame rate with FFmpeg.
-2. If the source is 60fps and motion smoothness matters, target 60fps for the
-   final YouTube upload if practical.
-3. If Resolve is unstable at 60fps, use the 24fps stable workflow for editing
-   or cut planning, but keep the possibility of a 60fps final render separate.
+2. If the source is 60fps-family and motion smoothness matters, target the same
+   60fps-family rate for the final YouTube upload if practical.
+3. If Resolve is unstable at 60fps, consult the 24fps recovery case for editing
+   or cut planning, but keep the possibility of a 60fps-family final render
+   separate.
 4. If only a 24fps final can be produced reliably, upload 24fps; it is accepted
    by YouTube and can be a reasonable delivery compromise.
 5. Document whether 24fps was chosen for artistic/delivery reasons or as a

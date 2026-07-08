@@ -44,5 +44,6 @@ py -3.11 -c "import DaVinciResolveScript as dvr; r=dvr.scriptapp('Resolve'); pri
 
 ## Related References
 
-- [resolve-24fps-stable-workflow.md](resolve-24fps-stable-workflow.md): stable
-  24fps workflow when Resolve playback is unstable with 60fps sources.
+- [resolve-24fps-recovery-case.md](resolve-24fps-recovery-case.md): failure-and-recovery
+  case where 24fps assets were used after Resolve playback was unstable with
+  60fps-family sources.

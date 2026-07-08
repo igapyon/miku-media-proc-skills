@@ -9,6 +9,8 @@ Use checks that match the requested output.
 - Confirm duration for video and audio outputs.
 - Confirm dimensions for video and image outputs.
 - Confirm stream count when video, audio, or subtitle streams are expected.
+- For final viewer-facing video, confirm whether expected title cards, end
+  cards, slates, or other front/back matter are present or intentionally absent.
 
 ## Recommended Checks
 
@@ -17,6 +19,7 @@ Use checks that match the requested output.
 - Check that transparency was preserved for image formats that support it.
 - Spot-check a rendered frame, thumbnail, waveform, or short preview when visual
   or audible quality matters.
+- Spot-check the first and last visible seconds of final video deliverables.
 
 ## Completion Report
 

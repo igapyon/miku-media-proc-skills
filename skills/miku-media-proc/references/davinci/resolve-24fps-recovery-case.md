@@ -1,8 +1,14 @@
-# DaVinci Resolve 24fps Stable Workflow
+# DaVinci Resolve 24fps Recovery Case
 
-Use this reference when DaVinci Resolve Studio playback is unstable with
-smartphone or game-recorded media, especially when 60fps footage appears slow,
-audio stutters, or a WAV extraction alone does not fix playback.
+Use this reference as a failure-and-recovery case record, not as the default
+DaVinci Resolve workflow.
+
+This document records a case where 60fps-family smartphone or game-recorded
+media was difficult to handle directly in DaVinci Resolve, then the work was
+recovered by creating 24fps equal-speed video and separate WAV audio assets.
+Prefer the general frame-rate policy first: inspect the source, preserve the
+source fps when practical, and only use this 24fps recovery pattern when Resolve
+stability or API limitations make the source-fps workflow impractical.
 
 ## Observed Environment
 
@@ -34,7 +40,7 @@ Connection smoke check:
 py -3.11 -c "import DaVinciResolveScript as dvr; r=dvr.scriptapp('Resolve'); print(bool(r)); print(r.GetVersionString() if r else '')"
 ```
 
-## Problem Pattern
+## Failure Pattern
 
 60fps smartphone or game recordings can be fragile in Resolve when the playback
 frame rate is effectively fixed at 24fps.
@@ -62,11 +68,11 @@ timelineFrameRate = 60.0
 timelinePlaybackFrameRate = 24
 ```
 
-If setting playback frame rate to 60 through the API is rejected, adapt the
-media to the stable playback setting instead of repeatedly trying to force the
-timeline.
+If setting playback frame rate to 60 through the API is rejected, this case
+adapted the media to the stable playback setting instead of repeatedly trying
+to force the timeline.
 
-## Stable Asset Strategy
+## Recovery Asset Strategy
 
 Create separate video and audio assets:
 
@@ -80,10 +86,11 @@ independently. It also makes it easier to replace only the unstable side without
 rebuilding the other asset.
 
 Important: FFmpeg `fps=24` drops or duplicates frames to produce 24fps output;
-it does not change duration by itself. Use it when the desired result is an
-equal-speed 24fps video for a 24fps Resolve workflow.
+it does not change duration by itself. This is a recovery compromise for this
+class of Resolve problem, not a general recommendation to convert 60fps-family
+sources to 24fps.
 
-Example for a Resolve-24fps-stable source:
+Example recovery command:
 
 ```powershell
 ffmpeg -y -hide_banner `
@@ -142,7 +149,7 @@ For a tail cut after a head cut:
 - Use `endFrame = source_start + cut_duration`.
 - Insert with `startFrame: source_start` and `endFrame: endFrame`.
 
-Example values from a 24fps workflow:
+Example values from the recovered 24fps workflow:
 
 ```text
 visible timeline start = 01:00:00:00
@@ -154,11 +161,11 @@ source start           = 6499
 new end                = 10041
 ```
 
-## Recommended Procedure
+## Recovery Procedure
 
 1. Inspect source metadata with FFmpeg before importing.
 2. If Resolve playback is fixed at 24fps or unstable with 60fps media, create a
-   24fps equal-speed video asset.
+   24fps equal-speed video asset as a recovery workaround.
 3. Extract audio as `WAV / PCM / 48kHz / stereo`.
 4. Import the video-only MP4 and audio-only WAV separately so video and audio
    problems can be isolated.
@@ -167,3 +174,11 @@ new end                = 10041
 7. For cuts, create new timelines from source frame ranges instead of modifying
    the original timeline in place.
 8. Verify video and audio duration, placement frame, and visible timeline start.
+
+## Do Not Generalize This Case
+
+- Do not choose 24fps merely because this recovery worked once.
+- Do not use this as the default for game footage or motion-dense screen
+  recordings.
+- Do not treat the intermediate recovery fps as the final delivery fps.
+- If a 60fps-family workflow is stable, prefer that for 60fps-family sources.
