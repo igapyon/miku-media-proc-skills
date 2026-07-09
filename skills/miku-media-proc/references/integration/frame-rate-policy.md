@@ -54,6 +54,11 @@ Default expectations:
   targets when size, compatibility, or platform limits matter.
 - 30fps source: keep 30fps unless there is a specific reason to convert.
 
+If the input is 60fps-family game footage, guide the user toward preserving the
+60fps-family rate for output unless there is a specific reason not to. For
+YouTube and similar upload targets, prefer smoothness for game footage and
+explain the reason clearly if proposing a 30fps output.
+
 Do not up-convert low-fps game footage to a higher fps as if new motion detail
 were created. Only do so for a specific delivery requirement or an explicit
 motion-interpolation workflow.

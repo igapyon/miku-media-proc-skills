@@ -27,13 +27,30 @@ target inspectable as its own timeline.
 ## Recommended Resolve Delivery Flow
 
 1. Confirm the timeline or range that should be uploaded.
-2. Confirm final delivery fps using [youtube-upload-fps.md](youtube-upload-fps.md).
-3. Confirm whether the program assembly should include a title card or end card.
-4. Confirm final audio is present and aligned.
-5. Render to a local output file intended for upload, not to an intermediate
+2. Confirm whether the target is normal horizontal YouTube video,
+   Shorts-style vertical video, or both using
+   [youtube-format-duration-guidance.md](youtube-format-duration-guidance.md).
+3. Confirm final delivery fps using [youtube-upload-fps.md](youtube-upload-fps.md).
+4. Confirm whether the program assembly should include a title card or end card.
+5. Confirm final audio is present and aligned.
+6. Render to a local output file intended for upload, not to an intermediate
    troubleshooting asset.
-6. Inspect the rendered file with FFmpeg.
-7. If the output is acceptable, treat that file as the YouTube upload candidate.
+7. Inspect the rendered file with FFmpeg.
+8. If the output is acceptable, treat that file as the YouTube upload candidate.
+
+## Upload Responsibility
+
+This skill should prepare and verify a local YouTube upload candidate, then
+recommend manual upload by the user in YouTube Studio.
+
+Do not automate YouTube upload by default. Automated upload is not recommended
+for this skill at this time because publishing involves account state,
+visibility, metadata, policy checks, thumbnails, rights, audience settings, and
+human confirmation.
+
+If the user explicitly asks about upload automation, treat it as a separate
+workflow discussion and confirm scope before doing anything beyond preparing
+the local file.
 
 ## Program Assembly Notes
 
