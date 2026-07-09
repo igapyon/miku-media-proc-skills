@@ -7,3 +7,4 @@
 # Local/generated work files
 workplace/*
 !workplace/.gitkeep
+temp/*

@@ -20,6 +20,9 @@ Use checks that match the requested output.
 - Spot-check a rendered frame, thumbnail, waveform, or short preview when visual
   or audible quality matters.
 - Spot-check the first and last visible seconds of final video deliverables.
+- For generated audio or video playback checks, prefer VLC media player as the
+  primary local playback tool. Use browser playback only as a supplemental
+  check, especially when audio output or playback behavior is uncertain.
 
 ## Completion Report
 
